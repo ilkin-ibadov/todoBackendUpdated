@@ -48,12 +48,13 @@ router.put("/:id", auth, async (req, res) => {
 // Delete a todo
 router.delete("/:id", auth, async (req, res) => {
   try {
-    const todo = await Todo.findOne({ _id: req.params.id, userId: req.user });
+    const _id = req.params.id
+
+    const todo = await Todo.findByIdAndDelete({ _id });
     if (!todo) {
       return res.status(404).json({ message: "Todo not found" });
     }
 
-    await todo.remove();
     res.json({ message: "Todo removed" });
   } catch (err) {
     res.status(500).json({ error: err.message });
