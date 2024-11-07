@@ -3,8 +3,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const todoRoutes = require("./routes/todoRoutes");
+const cors = require("cors")
+
 
 const app = express();
+
+app.use(cors())
+
 
 // Middleware
 app.use(express.json());
